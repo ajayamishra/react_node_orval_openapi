@@ -1,0 +1,45 @@
+info:
+  title: Products
+paths:
+  /products:
+    get:
+      operationId: products/index
+      tags:
+        - Products
+      summary: Get Products
+      responses:
+        "200":
+          description: Get Products
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductsIndexResponse"
+              examples:
+                ProductsExist:
+                  value:
+                    products:
+                      - id: p-1
+                        name: Demo Product Name
+                        images: http://imageurl.com/1.jpg
+                        description: This is a product description
+                        category: Category-1
+                        price: 100
+                        color: RED
+                ProductsNotExist:
+                  value:
+                    products: []
+components:
+  schemas:
+    ProductsShowResponse:
+      allOf:
+        - type: object
+          $ref: "./models/product.yaml#/components/schemas/Product"
+    ProductsIndexResponse:
+      allOf:
+        - type: object
+          properties:
+            products:
+              type: array
+              items:
+                allOf:
+                  - $ref: "./models/product.yaml#/components/schemas/Product"

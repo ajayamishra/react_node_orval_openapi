@@ -1,0 +1,70 @@
+info:
+  title: Users
+paths:
+  /users/{id}:
+    get:
+      operationId: users/show
+      tags:
+        - Users
+      summary: Get User
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+      responses:
+        "200":
+          description: Get User
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/UsersShowResponse"
+              examples:
+                UserExist:
+                  value:
+                    id: 1
+                    name: John Snow
+                UserNotExist:
+                  value: {}
+  /users:
+    get:
+      operationId: users/index
+      tags:
+        - Users
+      summary: Get Users
+      responses:
+        "200":
+          description: Get Users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersIndexResponse"
+              examples:
+                UsersExist:
+                  value:
+                    users:
+                      - first_name: John
+                        last_name: Snow
+                        email: johnsnow@mail.com
+                        mobile: 000-0000-0000
+                        role: user
+                UsersNotExist:
+                  value:
+                    users: []
+components:
+  schemas:
+    UsersShowResponse:
+      allOf:
+        - type: object
+          $ref: "./models/user.yaml#/components/schemas/User"
+    UsersIndexResponse:
+      allOf:
+        - type: object
+          properties:
+            users:
+              type: array
+              items:
+                allOf:
+                  - $ref: "./models/user.yaml#/components/schemas/User"

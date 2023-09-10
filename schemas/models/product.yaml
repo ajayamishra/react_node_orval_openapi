@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Product:
+      description: Product
+      type: object
+      properties:
+        id:
+          type: string
+          example: "p-1"
+        name:
+          type: string
+          example: "Demo Product Name"
+        images:
+          type: string
+          example: "http://imageurl.com/1.jpg"
+        description:
+          type: string
+          example: "This is a product description"
+        category:
+          type: string
+          example: "Category-1"
+        price:
+          type: number
+          example: 100
+        color:
+          type: string
+          enum: ["RED", "GREEN", "BLUE", "YELLOW", "BLACK", "WHITE"]
+          example: "RED"
+      required:
+        - id
+        - name
+        - images
+        - description
+        - category
+        - price
+        - color
